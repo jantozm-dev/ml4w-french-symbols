@@ -90,6 +90,3 @@ git clone https://github.com/YOUR_USERNAME/ml4w-french-symbols.git /tmp/ml4w-fre
 | Exposants | ² 3 |
 | Divers | € ° µ ± |
 
-## License
-
-MIT
