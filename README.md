@@ -4,8 +4,6 @@ A Quickshell widget for ML4W OS that lets you click-to-copy French special chara
 
 Slides in from the left edge of the screen, matching the ML4W Material You design language (gradient borders, glass panels, shadow blur, Fira Sans Semibold).
 
-![screenshot](screenshot.png)
-
 ## Features
 
 - 50 French symbols: accented letters, ligatures, guillemets, dashes, apostrophes, and more
@@ -15,6 +13,7 @@ Slides in from the left edge of the screen, matching the ML4W Material You desig
 - Slides in from the left with 350ms `OutQuint` easing
 - Click outside or press Escape to dismiss
 - Fully themed from your Matugen/wallpaper-generated colors
+- Adds an "É" button to the ML4W sidebar top bar
 
 ## Requirements
 
@@ -57,17 +56,38 @@ git clone https://github.com/YOUR_USERNAME/ml4w-french-symbols.git /tmp/ml4w-fre
    hl.bind(mainMod .. " + CTRL + Y", hl.dsp.exec_cmd("qs ipc call symbols toggle"), { description = "Open French Symbols widget" })
    ```
 
-4. Restart Quickshell:
+4. (Optional) Add the É button to the sidebar top bar in `~/.config/quickshell/SidebarApp/SidebarWindow.qml`, after the screenshot ActionIcon:
+
+   ```qml
+   ActionIcon {
+       iconTxt: "É"
+       onClicked: {
+           root.isOpen = false
+           Quickshell.execDetached(["bash", "-c", "qs ipc call symbols toggle"])
+       }
+   }
+   ```
+
+5. Restart Quickshell:
 
    ```bash
    pkill qs && qs &
    ```
+
+## Uninstall
+
+```bash
+bash /path/to/ml4w-french-symbols/uninstall.sh
+```
+
+This removes the SymbolsApp folder, cleans up shell.qml, removes the keybinding, and removes the sidebar button.
 
 ## Usage
 
 | Method | Command |
 |--------|---------|
 | Keybind | `Super + Ctrl + Y` |
+| Sidebar | Click the "É" icon in the top bar |
 | IPC | `qs ipc call symbols toggle` |
 | IPC (open) | `qs ipc call symbols open` |
 | IPC (close) | `qs ipc call symbols close` |
@@ -90,3 +110,6 @@ git clone https://github.com/YOUR_USERNAME/ml4w-french-symbols.git /tmp/ml4w-fre
 | Exposants | ² 3 |
 | Divers | € ° µ ± |
 
+## License
+
+MIT
